@@ -4,10 +4,7 @@
 #include <math.h>
 #include <time.h>
 
-#include "neuron.h"
-#include "layer.h"
 #include "net.h"
-#include "misc.h"
 
 int main(void) {
 	srand(time(NULL));

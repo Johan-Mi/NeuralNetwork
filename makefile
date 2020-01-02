@@ -18,3 +18,6 @@ net.o: net.c net.h
 
 main: main.o misc.o neuron.o layer.o net.o
 	gcc $(CFLAGS) -o main main.o misc.o neuron.o layer.o net.o -lm
+
+clean:
+	rm *.o main

@@ -3,14 +3,14 @@
 #include "layer.h"
 
 typedef struct {
-	unsigned layerCount;
+	uint layerCount;
 	Layer* layers;
-	float* output;
-	unsigned outputCount;
-	float* error;
-	float cost;
+	T* output;
+	uint outputCount;
+	T* error;
+	T cost;
 } NeuralNet;
 
-NeuralNet makeNeuralNet(const unsigned, ...);
+NeuralNet makeNeuralNet(const uint, ...);
 void deleteNeuralNet(NeuralNet*);
-void think(NeuralNet*, const float*, const float*);
+void think(NeuralNet*, const T*, const T*);

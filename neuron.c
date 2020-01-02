@@ -1,10 +1,10 @@
 #include "neuron.h"
 #include "misc.h"
 
-Neuron makeNeuron(const unsigned connectionCount) {
+Neuron makeNeuron(const uint connectionCount) {
 	if(connectionCount) {
-		Neuron ret = {0, randFloat(), connectionCount, MKARR(float, connectionCount)};
-		for(unsigned i = 0; i < connectionCount; i++)
+		Neuron ret = {0, randFloat(), connectionCount, MKARR(T, connectionCount)};
+		for(uint i = 0; i < connectionCount; i++)
 			ret.weights[i] = randFloat();
 		return ret;
 	} else {

@@ -4,6 +4,9 @@
 
 #define MKARR(t,c) (malloc((c)*sizeof(t)))
 
-float sigmoid(const float);
-float sigmoidDerivative(const float);
-float randFloat(void);
+typedef unsigned int uint;
+typedef float T;
+
+T sigmoid(const T);
+T sigmoidDerivative(const T);
+T randFloat(void);

@@ -3,14 +3,14 @@
 
 #include "misc.h"
 
-float sigmoid(const float x) {
+T sigmoid(const T x) {
 	return 1 / (1 + expf(-x));
 }
 
-float sigmoidDerivative(const float x) {
+T sigmoidDerivative(const T x) {
 	return sigmoid(x) * (1 - sigmoid(x));
 }
 
-float randFloat(void) {
-	return 2 * ((float)rand() / RAND_MAX) - 1;
+T randFloat(void) {
+	return 2 * ((T)rand() / RAND_MAX) - 1;
 }

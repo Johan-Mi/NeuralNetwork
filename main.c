@@ -14,8 +14,8 @@ int main(void) {
 
 	NeuralNet net = makeNeuralNet(4, 2, 3, 3, 1);
 
-	float input[] = {1.f, 0.f};
-	float expectedOutput[] = {1.f};
+	T input[] = {1.f, 0.f};
+	T expectedOutput[] = {1.f};
 	think(&net, input, expectedOutput);
 
 	deleteNeuralNet(&net);

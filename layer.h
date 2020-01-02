@@ -3,9 +3,9 @@
 #include "neuron.h"
 
 typedef struct {
-	unsigned size;
+	uint size;
 	Neuron* neurons;
 } Layer;
 
-Layer makeLayer(const unsigned, const unsigned);
+Layer makeLayer(const uint, const uint);
 void deleteLayer(Layer*);

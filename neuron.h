@@ -1,11 +1,13 @@
 #pragma once
 
+#include "misc.h"
+
 typedef struct {
-	float activation;
-	float bias;
-	unsigned connectionCount;
-	float* weights;
+	T activation;
+	T bias;
+	uint connectionCount;
+	T* weights;
 } Neuron;
 
-Neuron makeNeuron(const unsigned);
+Neuron makeNeuron(const uint);
 void deleteNeuron(Neuron*);

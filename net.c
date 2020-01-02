@@ -19,11 +19,9 @@ NeuralNet makeNeuralNet(const uint layerCount, ...) {
 }
 
 void deleteNeuralNet(NeuralNet* net) {
-	if(net->layers) {
-		for(uint i = 0; i < net->layerCount; i++)
-			deleteLayer(&net->layers[i]);
-		free(net->layers);
-	}
+	for(uint i = 0; i < net->layerCount; i++)
+		deleteLayer(&net->layers[i]);
+	free(net->layers);
 	free(net->output);
 	free(net->error);
 }

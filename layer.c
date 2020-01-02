@@ -9,9 +9,7 @@ Layer makeLayer(const uint size, const uint prevSize) {
 }
 
 void deleteLayer(Layer* layer)  {
-	if(layer->neurons) {
-		for(uint i = 0; i < layer->size; i++)
-			deleteNeuron(&layer->neurons[i]);
-		free(layer->neurons);
-	}
+	for(uint i = 0; i < layer->size; i++)
+		deleteNeuron(&layer->neurons[i]);
+	free(layer->neurons);
 }

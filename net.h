@@ -13,4 +13,6 @@ typedef struct {
 
 NeuralNet makeNeuralNet(const uint, ...);
 void deleteNeuralNet(NeuralNet*);
+NeuralNet copyNeuralNet(const NeuralNet*);
 void think(NeuralNet*, const T*, const T*);
+void train(NeuralNet*, uint, const T**, const T**);

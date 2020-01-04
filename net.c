@@ -26,6 +26,21 @@ void deleteNeuralNet(NeuralNet* net) {
 	free(net->error);
 }
 
+NeuralNet copyNeuralNet(const NeuralNet* net) {
+	NeuralNet ret;
+	ret.layerCount = net->layerCount;
+	ret.outputCount = net->outputCount;
+	ret.error = MKARR(T, ret.outputCount);
+	ret.output = MKARR(T, ret.outputCount);
+	ret.layers = MKARR(Layer, ret.layerCount);
+
+	for(uint i = 0; i < ret.layerCount; i++) {
+		ret.layers[i] = copyLayer(&net->layers[i]);
+	}
+
+	return ret;
+}
+
 void think(NeuralNet* net, const T* input, const T* expectedOutput) {
 	for(uint i = 0; i < net->layers[0].size; i++)
 		net->layers[0].neurons[i].activation = input[i];
@@ -35,6 +50,7 @@ void think(NeuralNet* net, const T* input, const T* expectedOutput) {
 			T sum = net->layers[i].neurons[j].bias;
 			for(uint k = 0; k < net->layers[i].neurons[j].connectionCount; k++)
 				sum += net->layers[i - 1].neurons[k].activation * net->layers[i].neurons[j].weights[k];
+			net->layers[i].neurons[j].preSigmoid = sum;
 			net->layers[i].neurons[j].activation = sigmoid(sum);
 		}
 	}
@@ -66,4 +82,14 @@ void think(NeuralNet* net, const T* input, const T* expectedOutput) {
 		printf("%f", expectedOutput[i]);
 	}
 	printf("] Cost: %f\n", net->cost);
+}
+
+void train(NeuralNet* net, uint n, const T** inputs, const T** expectedOutputs) {
+	NeuralNet delta = copyNeuralNet(net);
+
+	for(uint i = 0; i < n; i++) {
+		think(net, inputs[i], expectedOutputs[i]);
+	}
+
+	deleteNeuralNet(&delta);
 }

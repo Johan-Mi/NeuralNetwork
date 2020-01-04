@@ -7,7 +7,9 @@ typedef struct {
 	T bias;
 	uint connectionCount;
 	T* weights;
+	T preSigmoid;
 } Neuron;
 
 Neuron makeNeuron(const uint);
 void deleteNeuron(Neuron*);
+Neuron copyNeuron(const Neuron*);

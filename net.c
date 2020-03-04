@@ -7,10 +7,15 @@
 
 NeuralNet makeNeuralNet(const uint layerCount, ...) {
 	NeuralNet ret = {layerCount, MKARR(Layer, layerCount)};
+	ret.delta = malloc(sizeof(NeuralNet));
+	ret.delta->layers = MKARR(Layer, layerCount);
 	va_list args;
 	va_start(args, layerCount);
-	for(uint i = 0; i < layerCount; i++)
-		ret.layers[i] = makeLayer(va_arg(args, uint), i ? ret.layers[i - 1].size : 0);
+	for(uint i = 0; i < layerCount; i++) {
+		uint a = va_arg(args, uint);
+		ret.layers[i] = makeLayer(a, i ? ret.layers[i - 1].size : 0);
+		ret.delta->layers[i] = makeLayer(a, i ? ret.layers[i - 1].size : 0);
+	}
 	va_end(args);
 	ret.outputCount = ret.layers[ret.layerCount - 1].size;
 	ret.output = MKARR(T, ret.outputCount);
@@ -24,21 +29,7 @@ void deleteNeuralNet(NeuralNet* net) {
 	free(net->layers);
 	free(net->output);
 	free(net->error);
-}
-
-NeuralNet copyNeuralNet(const NeuralNet* net) {
-	NeuralNet ret;
-	ret.layerCount = net->layerCount;
-	ret.outputCount = net->outputCount;
-	ret.error = MKARR(T, ret.outputCount);
-	ret.output = MKARR(T, ret.outputCount);
-	ret.layers = MKARR(Layer, ret.layerCount);
-
-	for(uint i = 0; i < ret.layerCount; i++) {
-		ret.layers[i] = copyLayer(&net->layers[i]);
-	}
-
-	return ret;
+	free(net->delta);
 }
 
 void think(NeuralNet* net, const T* input, const T* expectedOutput) {
@@ -84,12 +75,16 @@ void think(NeuralNet* net, const T* input, const T* expectedOutput) {
 	printf("] Cost: %f\n", net->cost);
 }
 
-void train(NeuralNet* net, uint n, const T** inputs, const T** expectedOutputs) {
-	NeuralNet delta = copyNeuralNet(net);
-
+void train(NeuralNet* net, uint n,
+		const T* inputs,
+		const T* expectedOutputs) {
+	for(uint i = 0; i < net->layerCount; i++)
+		for(uint j = 0; j < net->layers[i].size; j++)
+			net->delta->layers[i].neurons[j].activation = 0;
 	for(uint i = 0; i < n; i++) {
-		think(net, inputs[i], expectedOutputs[i]);
+		think(net, 
+				&inputs[i * net->layers[0].size],
+				&expectedOutputs[i * net->outputCount]);
 	}
 
-	deleteNeuralNet(&delta);
 }

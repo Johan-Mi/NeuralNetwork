@@ -10,10 +10,23 @@ int main(void) {
 	srand(time(NULL));
 
 	NeuralNet net = makeNeuralNet(2, 2, 1);
+	
+	T inputs[] = {
+		0.f, 0.f,
+		0.f, 1.f,
+		1.f, 0.f,
+		1.f, 1.f,
+	};
 
-	T input[] = {1.f, 0.f};
-	T expectedOutput[] = {1.f};
-	think(&net, input, expectedOutput);
+	T outputs[] = {
+		0.f,
+		1.f,
+		1.f,
+		0.f,
+	};
+
+	for(unsigned i = 0; i < 3; i++)
+		train(&net, 4, inputs, outputs);
 
 	deleteNeuralNet(&net);
 

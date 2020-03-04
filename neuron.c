@@ -16,15 +16,3 @@ void deleteNeuron(Neuron* neuron) {
 	if(neuron->weights)
 		free(neuron->weights);
 }
-
-Neuron copyNeuron(const Neuron* neuron) {
-	Neuron ret;
-	ret.connectionCount = neuron->connectionCount;
-	ret.weights = MKARR(T, ret.connectionCount);
-	ret.bias = 0;
-	for(uint i = 0; i < ret.connectionCount; i++) {
-		ret.weights[i] = 0;
-	}
-
-	return ret;
-}

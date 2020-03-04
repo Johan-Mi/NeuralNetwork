@@ -9,4 +9,3 @@ typedef struct {
 
 Layer makeLayer(const uint, const uint);
 void deleteLayer(Layer*);
-Layer copyLayer(const Layer*);

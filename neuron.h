@@ -12,4 +12,3 @@ typedef struct {
 
 Neuron makeNeuron(const uint);
 void deleteNeuron(Neuron*);
-Neuron copyNeuron(const Neuron*);

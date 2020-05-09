@@ -1,23 +1,14 @@
 .DEFAULT_GOAL := main
-CFLAGS = -std=c11 -O3 -Wall
+CFLAGS = -std=c++17 -O3 -Wall
 
-main.o: main.c
-	gcc $(CFLAGS) -c main.c
+main.o: main.cpp net.hpp layer.hpp neuron.hpp
+	g++ $(CFLAGS) -c main.cpp
 
-misc.o: misc.c misc.h
-	gcc $(CFLAGS) -c misc.c
+misc.o: misc.cpp misc.hpp
+	g++ $(CFLAGS) -c misc.cpp
 
-neuron.o: neuron.c neuron.h
-	gcc $(CFLAGS) -c neuron.c
-
-layer.o: layer.c layer.h
-	gcc $(CFLAGS) -c layer.c
-
-net.o: net.c net.h
-	gcc $(CFLAGS) -c net.c
-
-main: main.o misc.o neuron.o layer.o net.o
-	gcc $(CFLAGS) -o main main.o misc.o neuron.o layer.o net.o -lm
+main: main.o misc.o
+	g++ $(CFLAGS) -o main main.o misc.o -lm
 
 clean:
-	rm *.o main
+	rm -f *.o main

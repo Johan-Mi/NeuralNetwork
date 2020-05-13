@@ -67,8 +67,8 @@ struct NeuralNet {
 		for(size_t i = 0; i < layers[0].size; i++)
 			std::cout << input[i] << ' ';
 		std::cout << "\b] -> [";
-		for(size_t i = 0; i < outputCount; i++)
-			std::cout << output[i] << ' ';
+		for(auto o : output)
+			std::cout << o << ' ';
 		std::cout << "\b] Expected: [";
 		for(size_t i = 0; i < outputCount; i++)
 			std::cout << expectedOutput[i] << ' ';

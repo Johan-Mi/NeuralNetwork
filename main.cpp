@@ -7,12 +7,6 @@ int main() {
 
 	NeuralNet<float> net(2, 1);
 
-	std::cout << "Layer count: " << net.layerCount << '\n';
-	for(auto a : net.layers) {
-		std::cout << a.size << ' ';
-	}
-	std::cout << '\n';
-
 	constexpr float inputs[] = {
 		0.f, 0.f,
 		0.f, 1.f,

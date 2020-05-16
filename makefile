@@ -1,4 +1,4 @@
-CFLAGS = -std=c++20 -g -Wall
+CFLAGS = -std=c++20 -O3 -Wall
 CC = g++
 
 main: main.o

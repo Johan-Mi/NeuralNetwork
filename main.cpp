@@ -5,16 +5,16 @@
 int main() {
 	srand(std::time(0));
 
-	NeuralNet<float> net(2, 1);
+	NeuralNet<float, 2, 3, 1> net;
 
-	constexpr float inputs[] = {
+	constexpr std::array<float, 2> inputs[] = {
 		0.f, 0.f,
 		0.f, 1.f,
 		1.f, 0.f,
 		1.f, 1.f,
 	};
 
-	constexpr float outputs[] = {
+	constexpr std::array<float, 1> outputs[] = {
 		0.f,
 		1.f,
 		1.f,

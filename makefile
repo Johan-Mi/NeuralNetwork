@@ -1,4 +1,4 @@
-CFLAGS = -std=c++20 -O3 -Wall
+CFLAGS = -std=c++20 -O3 -Wall -march=native
 CC = g++
 
 main: main.o
